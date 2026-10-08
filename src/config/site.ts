@@ -12,7 +12,7 @@ export const site = {
   github: "https://github.com/Omlangade21",
   // WhatsApp: set NEXT_PUBLIC_WHATSAPP_URL (e.g. https://wa.me/91XXXXXXXXXX). Empty = button hidden.
   whatsappUrl: process.env.NEXT_PUBLIC_WHATSAPP_URL ?? "",
-  // Enquiry forms: set NEXT_PUBLIC_FORM_ENDPOINT (Formspree etc.). Empty = opens visitor's email app.
+  // Enquiry forms: set NEXT_PUBLIC_FORM_ENDPOINT (Formspree etc.). Uses the Zenvyq Formspree endpoint if unset.
   formEndpoint: process.env.NEXT_PUBLIC_FORM_ENDPOINT ?? "",
   nav: [
     { href: "/services", label: "Services" }, { href: "/industries", label: "Industries" },
