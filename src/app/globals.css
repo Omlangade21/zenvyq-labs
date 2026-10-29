@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-:root { color-scheme: dark; }
+:root { color-scheme: light dark; }
 html { scroll-behavior: auto; }
 body { @apply bg-ink text-zinc-400 antialiased; }
 ::selection { background: #8b7bff; color: #fff; }
@@ -17,7 +17,6 @@ body { @apply bg-ink text-zinc-400 antialiased; }
   .chip { @apply inline-block rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-zinc-300; }
   .input { @apply w-full rounded-xl border border-white/10 bg-ink-soft px-4 py-3 text-sm text-white placeholder:text-zinc-600 transition focus:border-accent/60 focus:outline-none; }
 }
-
 .text-grad { background: linear-gradient(100deg,#fff 0%,#a99cff 45%,#22d3ee 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .grain { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E"); }
 .btn-light { position: relative; overflow: hidden; }
@@ -29,3 +28,26 @@ body { @apply bg-ink text-zinc-400 antialiased; }
 .cue { animation: cue 1.8s ease-in-out infinite; }
 @keyframes spin-slow { to { transform: rotate(360deg); } }
 .spin-slow { animation: spin-slow 40s linear infinite; }
+
+/* System theme: keep the visitor's OS preference in control without a hydration flash. */
+@media (prefers-color-scheme: light) {
+  :root { color-scheme: light; }
+  body { background: #f6f7fb !important; color: #52586a !important; }
+  [class~="text-white"] { color: #171827 !important; }
+  [class~="text-zinc-400"] { color: #52586a !important; }
+  [class~="text-zinc-300"] { color: #444b5e !important; }
+  [class~="text-zinc-500"] { color: #626a7e !important; }
+  [class~="text-zinc-600"] { color: #70788b !important; }
+  [class~="bg-ink"] { background-color: #f6f7fb !important; }
+  [class~="bg-ink-soft"] { background-color: #ffffff !important; }
+  [class~="bg-white/5"], [class~="bg-white/[0.03]"] { background-color: rgba(30, 41, 59, .035) !important; }
+  [class~="border-white/10"] { border-color: rgba(30, 41, 59, .12) !important; }
+  [class~="border-white/15"], [class~="border-white/20"] { border-color: rgba(30, 41, 59, .2) !important; }
+  [class~="bg-ink/70"] { background-color: rgba(246, 247, 251, .88) !important; }
+  [class~="text-ink"] { color: #ffffff !important; }
+  [class~="bg-white"] { background-color: #171827 !important; }
+  .text-grad { background-image: linear-gradient(100deg,#171827 0%,#6252e8 48%,#0891b2 100%); }
+  .card-hover:hover { background-color: rgba(30, 41, 59, .055) !important; }
+  .input { background-color: #fff !important; color: #171827 !important; }
+  .input::placeholder { color: #8b93a5 !important; }
+}
