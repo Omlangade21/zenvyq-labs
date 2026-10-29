@@ -7,6 +7,7 @@ import { WorkPanels } from "@/components/WorkPanels";
 import { Reveal } from "@/components/Reveal";
 import { LeadForm } from "@/components/LeadForm";
 import { CTASection } from "@/components/CTASection";
+import { ConversationDemo } from "@/components/ConversationDemo";
 import { Button } from "@/components/Button";
 import { auditFields } from "@/data/forms";
 import { site } from "@/config/site";
@@ -23,6 +24,7 @@ export default function Home() {
       <WorkPanels />
       <AIWorkflow />
       <IndustriesExplorer />
+      <ConversationDemo />
       <section id="audit" className="section scroll-mt-16">
         <div className="wrap grid gap-12 lg:grid-cols-[.9fr_1.1fr]">
           <Reveal>
