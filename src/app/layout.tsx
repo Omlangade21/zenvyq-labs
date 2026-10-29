@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: { type: "website", siteName: site.name, title: site.title, description: site.description, url: "/" },
   twitter: { card: "summary_large_image", title: site.title, description: site.description },
 };
-export const viewport: Viewport = { themeColor: "#0a0b0d", colorScheme: "dark" };
+export const viewport: Viewport = { themeColor: [{ media: "(prefers-color-scheme: light)", color: "#f6f7fb" }, { media: "(prefers-color-scheme: dark)", color: "#090b12" }], colorScheme: "light dark" };
 const jsonLd = {
   "@context": "https://schema.org", "@type": "Organization", name: site.name, url: site.url, slogan: site.tagline, description: site.description, email: site.email,
   founder: { "@type": "Person", name: site.founder.name, jobTitle: site.founder.role, url: site.portfolio, sameAs: [site.github, site.portfolio] },
