@@ -1,31 +1,36 @@
 import type { Metadata } from "next";
-import { Mail, Globe, Github, MessageCircle } from "lucide-react";
-import { PageHero } from "@/components/SectionHeading";
-import { Reveal } from "@/components/Reveal";
+import { Globe, Mail, MessageCircle } from "lucide-react";
 import { LeadForm } from "@/components/LeadForm";
-import { Button } from "@/components/Button";
+import { PageHero } from "@/components/ui";
 import { contactFields } from "@/data/forms";
+import { services } from "@/data/content";
 import { site } from "@/config/site";
-export const metadata: Metadata = { title: "Contact", description: "Tell Zenvyq Labs what you’re trying to build or improve.", alternates: { canonical: "/contact" } };
-export default function Contact() {
+
+export const metadata: Metadata = { title: "Contact", description: "Tell Zenvyq Labs about your project. Email hello@zenvyqlabs.com, message us on WhatsApp or send an enquiry.", alternates: { canonical: "/contact" } };
+type Props = { searchParams: Promise<{ service?: string }> };
+export default async function Contact({ searchParams }: Props) {
+  const { service } = await searchParams;
+  const sel = services.find((s) => s.id === service)?.title;
   const rows = [
-    { icon: Mail, label: "Email", value: site.email, href: `mailto:${site.email}` },
-    { icon: Globe, label: "Portfolio", value: "omlangade21.github.io/portfolio", href: site.portfolio },
-    { icon: Github, label: "GitHub", value: "github.com/Omlangade21", href: site.github },
+    { Icon: Mail, label: "Email", value: site.email, href: `mailto:${site.email}` },
+    { Icon: Globe, label: "Website", value: "zenvyqlabs.com", href: site.url },
+    { Icon: MessageCircle, label: "WhatsApp", value: site.whatsappDisplay, href: site.whatsappUrl },
   ];
   return (
     <>
-      <PageHero eyebrow="Contact" title="Let’s build something useful.">Tell us what you’re trying to build or improve. Budget is optional.</PageHero>
-      <section className="section"><div className="wrap grid gap-10 lg:grid-cols-[1.3fr_.7fr]">
-        <Reveal><LeadForm kind="contact" fields={contactFields} submitLabel="Send Enquiry" successTitle="Enquiry ready" /></Reveal>
-        <Reveal delay={0.1} className="space-y-4">
-          {rows.map((r) => { const Icon = r.icon; return (
-            <a key={r.label} href={r.href} {...(r.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="card card-hover flex items-center gap-4 p-5">
-              <Icon className="h-5 w-5 shrink-0 text-accent" aria-hidden="true" /><span className="min-w-0"><span className="block font-mono text-xs uppercase tracking-widest text-zinc-500">{r.label}</span><span className="block truncate text-sm text-white">{r.value}</span></span>
-            </a>
-          ); })}
-          {site.whatsappUrl ? <Button href={site.whatsappUrl} external className="w-full"><MessageCircle className="h-4 w-4" aria-hidden="true" />Chat on WhatsApp</Button> : <Button href={`mailto:${site.email}`} variant="ghost" className="w-full">Prefer email? Write to us</Button>}
-        </Reveal>
+      <PageHero eyebrow="Contact" title={<>Have a project in <span className="em">mind?</span></>}>Let’s discuss your business requirements and explore how the right technology solution can help.</PageHero>
+      <section className="section pt-4"><div className="wrap grid gap-14 lg:grid-cols-[.8fr_1.2fr] lg:gap-20">
+        <div>
+          <ul className="space-y-6">{rows.map(({ Icon, label, value, href }) => (
+            <li key={label}><a href={href} {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="group flex items-center gap-5">
+              <span className="grid h-14 w-14 place-items-center rounded-full border border-line text-accent transition group-hover:border-accent"><Icon className="h-6 w-6" aria-hidden="true" /></span>
+              <span><span className="block text-sm text-muted">{label}</span><span className="block text-xl font-semibold tracking-tight text-head group-hover:text-accent">{value}</span></span>
+            </a></li>))}
+          </ul>
+          <h2 className="mt-14 text-lg font-semibold text-head">What happens next</h2>
+          <ol className="mt-5 space-y-5">{["We read your enquiry and, if needed, ask a few clarifying questions.", "We discuss your requirements and tell you honestly what fits.", "If we’re a good match, we agree scope in writing before any build starts."].map((t, i) => <li key={t} className="flex gap-4 text-muted"><span className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-accent text-sm font-semibold text-accent">{i + 1}</span>{t}</li>)}</ol>
+        </div>
+        <LeadForm kind="contact" fields={contactFields} submitLabel="Send enquiry" defaults={sel ? { service: sel } : {}} />
       </div></section>
     </>
   );

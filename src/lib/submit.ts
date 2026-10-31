@@ -53,7 +53,7 @@ export async function submitLead(
     .filter(([k, v]) => v && k !== "_gotcha")
     .map(([k, v]) => `${k}: ${v}`)
     .join("\n");
-  const subject = kind === "audit" ? "Free audit request" : "Project enquiry";
+  const subject = kind === "audit" ? "Audit request" : "Project enquiry";
   window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   return "email";
 }
