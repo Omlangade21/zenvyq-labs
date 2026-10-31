@@ -1,3 +1,11 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = { reactStrictMode: true, eslint: { ignoreDuringBuilds: true } };
+
+import path from 'node:path';
+
+const nextConfig = {
+  reactStrictMode: true,
+  eslint: { ignoreDuringBuilds: true },
+  outputFileTracingRoot: path.join(process.cwd()),
+};
+
 export default nextConfig;
